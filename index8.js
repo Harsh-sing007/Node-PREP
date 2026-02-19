@@ -98,3 +98,23 @@ app.post("/users", (req, res) => {
 app.listen(8080, () => {
     console.log("Server started on port 8080");
 });
+
+
+//now the deleting the user 
+// ✅ Delete user by ID
+app.delete("/users/:id", (req, res) => {
+    const userId = Number(req.params.id);
+
+    const index = users.findIndex(u => u.id === userId);
+
+    if (index === -1) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    const deletedUser = users.splice(index, 1);
+
+    res.json({
+        message: "User deleted successfully",
+        user: deletedUser[0]
+    });
+});
