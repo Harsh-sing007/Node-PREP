@@ -31,26 +31,70 @@
 
 
 //http://localhost:8080/1  for 1st user display
-import express from 'express';
+// import express from 'express';
 
+// const app = express();
+
+// const users = [
+//     { id: 1, name: "John", email: "john@gmail.com", role: "student" },
+//     { id: 2, name: "Cathy", email: "cathyn@gmail.com", role: "student" },
+//     { id: 3, name: "Admin", email: "admin@gmail.com", role: "admin" }
+// ];
+// app.get("/", (req, res) => {
+//     res.json(users);
+// });
+// app.get("/:id", (req, res) => {
+//     const userId = Number(req.params.id);
+//     const user = users.find(u => u.id === userId);
+//     if (!user) {
+//         return res.status(404).json({ message: "User not found" });
+//     }
+//     res.json(user);
+// });
+// app.listen(8080, () => {
+//     console.log("Server started on port 8080");
+// });
+
+
+//need to add AN new object to the existing user 
+//http://localhost:8080/users
+import express from 'express';
 const app = express();
+
+// ✅ Middleware to read JSON body
+app.use(express.json());
 
 const users = [
     { id: 1, name: "John", email: "john@gmail.com", role: "student" },
     { id: 2, name: "Cathy", email: "cathyn@gmail.com", role: "student" },
     { id: 3, name: "Admin", email: "admin@gmail.com", role: "admin" }
 ];
+
+// ✅ Get all users
 app.get("/", (req, res) => {
     res.json(users);
 });
-app.get("/:id", (req, res) => {
-    const userId = Number(req.params.id);
-    const user = users.find(u => u.id === userId);
-    if (!user) {
-        return res.status(404).json({ message: "User not found" });
-    }
-    res.json(user);
+
+// ✅ Add new user
+app.post("/users", (req, res) => {
+
+    const { name, email, role } = req.body;
+
+    const newUser = {
+        id: users.length + 1,
+        name,
+        email,
+        role
+    };
+
+    users.push(newUser);
+
+    res.status(201).json({
+        message: "User added successfully",
+        user: newUser
+    });
 });
+
 app.listen(8080, () => {
     console.log("Server started on port 8080");
 });
