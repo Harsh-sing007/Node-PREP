@@ -14,3 +14,4 @@ app.listen(8080);
 app.get("/",(req,res)=> {
     res.send("Hello "+req.query.name + req.query.age);                       //   http://localhost:8080/?name=john&age=21
 });         
+
