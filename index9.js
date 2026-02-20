@@ -13,6 +13,6 @@ app.get("/",(req,res)=>{
    // res.end()
   // res.send("Hello World")
    // res.json({name:"Johm",age: 21})
-   console.log(req.url);
+   console.log(req.message);
    res.json(req.url);
 });
