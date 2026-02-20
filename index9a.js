@@ -19,20 +19,41 @@
 
 
 // when a json  token format is given 
+// import express from 'express';
+// const app = express();
+
+// app.listen(8080, () => {
+//     console.log("Server running on port 8080");
+// });
+// app.use(express.json());
+
+// app.post("/", (req, res) => {
+//     const token = req.body.token;
+
+//     if (token === "1234") {
+//         res.status(200).send("Welcome");
+//     } else {
+//         res.status(403).send("Access Denied");
+//     }
+// });
+
+
+//get method, auth, bearer token  
 import express from 'express';
 const app = express();
-
 app.listen(8080, () => {
     console.log("Server running on port 8080");
 });
-app.use(express.json());
-
-app.post("/", (req, res) => {
-    const token = req.body.token;
+app.get("/", (req, res) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(401).send("No Token Provided");
+    }
+    const token = authHeader.split(" ")[1];
 
     if (token === "1234") {
-        res.status(200).send("Welcome");
+        return res.status(200).send("Welcome");
     } else {
-        res.status(403).send("Access Denied");
+        return res.status(403).send("Access Denied");
     }
 });
