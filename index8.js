@@ -62,7 +62,7 @@ import express from 'express';
 const app = express();
 
 // ✅ Middleware to read JSON body
-app.use(express.json());
+app.use(express.json());       //built in middleware
 
 const users = [
     { id: 1, name: "John", email: "john@gmail.com", role: "student" },
