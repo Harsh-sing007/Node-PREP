@@ -1,4 +1,4 @@
-//congiguration was done in routes folder
+//configuration was done in routes folder
 // import express from "express"
 // import userRouter from "./userRoutes.js"
 // import productRouter from "./productRoutes.js"
